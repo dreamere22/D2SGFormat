@@ -11,6 +11,7 @@ doc: |
   SG is used by [Disciples 2](https://en.wikipedia.org/wiki/Disciples_II:_Dark_Prophecy) game for scenario maps and saves.
   
   Written and tested by Vladimir Makeev, 2019-2020
+  Extended and updated by Eugene L., 2025
 
 seq:
   - id: header
@@ -902,6 +903,28 @@ types:
         type: site_visitor
         repeat: expr
         repeat-expr: visitor_count.value
+  mid_site_resource_market:
+    seq:
+      - id: site
+        type: site
+      - id: custom
+        type: bool_record('CUSTOM')
+      - id: code_len
+        type: int_record('CODE_LEN')
+        if: custom.value == 1
+      - id: code
+        type: string_record('CODE')
+        if: custom.value == 1
+      - id: bank
+        type: bank_record('BANK')
+      - id: inf
+        type: int_record('INF')
+      - id: visitor_count
+        type: int_record('SnnnSInnnn')
+      - id: visitors
+        type: site_visitor
+        repeat: expr
+        repeat-expr: visitor_count.value 
   mid_village:
     seq:
       - id: city
@@ -941,7 +964,7 @@ types:
     seq:
       - id: crystal_id
         type: string_record('CRYSTAL_ID')
-      - id: reource
+      - id: resource
         type: int_record('RESOURCE')
       - id: position
         type: position
@@ -1098,6 +1121,17 @@ types:
     seq:
       - id: id_site
         type: string_record('ID_SITE')
+  event_condition_user_script:
+    doc: user Lua script
+    seq:
+      - id: code_len
+        type: int_record('CODE_LEN')
+      - id: code
+        type: string_record('CODE')
+      - id: descr_len
+        type: int_record('DESCR_LEN')
+      - id: descr
+        type: string_record('DESCR')
   event_condition:
     seq:
       - id: category
@@ -1123,6 +1157,7 @@ types:
             11: event_condition_transforming_land
             18: event_condition_variable_is_in_range
             12: event_condition_visiting_a_site
+            23: event_condition_user_script
   event_effect_change_terrain:
     doc: change a block of terrain of size <numvalue> to <lookup> race terrain at location <id_loc>
     seq:
@@ -1700,6 +1735,7 @@ types:
             '".?AVCMidSiteMerchant@@"': mid_site_merchant
             '".?AVCMidRuin@@"': mid_ruin
             '".?AVCMidSiteTrainer@@"': mid_site_trainer
+            '".?AVCMidSiteResourceMarket@@"': mid_site_resource_market
             '".?AVCMidVillage@@"': mid_village
             '".?AVCMidCrystal@@"': mid_crystal
             '".?AVCMidLandmark@@"': mid_landmark
