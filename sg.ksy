@@ -1132,6 +1132,32 @@ types:
         type: int_record('DESCR_LEN')
       - id: descr
         type: string_record('DESCR')
+  event_condition_game_mode:
+    doc: check the game mode (single, hotseat or network)
+    seq:
+      - id: mode
+        type: int_record('MODE')
+  event_condition_owning_the_resources:
+    doc: check if a player owns a certain amount of resources
+    seq:
+      - id: bank
+        type: bank_record('BANK')
+      - id: gre
+        type: bool_record('GRE')
+  event_condition_player_type:
+    doc: check if the player is human or not
+    seq:
+      - id: ai
+        type: bool_record('AI')
+  event_condition_variables_comparison:
+    doc: compare two variables with different modes
+    seq:
+      - id: var1
+        type: int_record('VAR1')
+      - id: var2
+        type: int_record('VAR2')
+      - id: cmp
+        type: int_record('CMP')
   event_condition:
     seq:
       - id: category
@@ -1146,16 +1172,20 @@ types:
             3: event_condition_entering_a_city
             2: event_condition_entering_a_predefined_zone
             0: event_condition_frequency
+            20: event_condition_game_mode
             16: event_condition_item_to_location
             10: event_condition_looting_a_ruin
             4: event_condition_owning_a_city
             6: event_condition_owning_an_item
+            19: event_condition_owning_the_resources
+            21: event_condition_player_type
             7: event_condition_specific_leader_owning_an_item
             17: event_condition_stack_existance
             15: event_condition_stack_to_city
             14: event_condition_stack_to_location
             11: event_condition_transforming_land
             18: event_condition_variable_is_in_range
+            22: event_condition_variables_comparison
             12: event_condition_visiting_a_site
             23: event_condition_user_script
   event_effect_change_terrain:
